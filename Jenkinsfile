@@ -8,7 +8,8 @@ pipeline {
     stages {
         stage('Clone Repository') {
             steps {
-                git 'https://github.com/VaibhavDewangan48/Scientific-Calculator.git'
+//                 git 'https://github.com/VaibhavDewangan48/Scientific-Calculator.git'
+                   git branch: 'main', credentialsId: 'github-credentials', url: 'https://github.com/VaibhavDewangan48/Scientific-Calculator.git'
             }
         }
 
