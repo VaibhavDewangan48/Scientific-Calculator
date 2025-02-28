@@ -1,23 +1,22 @@
----
-- name: Deploy Scientific Calculator
-  hosts: all
+- name: Deploy Scientific Calculator Container
+  hosts: localhost
   become: yes
-
   tasks:
-    - name: Pull Docker image from Docker Hub
-      community.docker.docker_image:
-        name: vaibhav48/scientific-calculator:latest
+
+    - name: Pull the latest Docker image
+      docker_image:
+        name: vaibhav48/scientific-calculator
         source: pull
 
-    - name: Stop existing container (if running)
-      community.docker.docker_container:
-        name: scientific-calculator
+    - name: Stop and remove existing container (if running)
+      docker_container:
+        name: scientific_calculator
         state: absent
 
-    - name: Run new container
-      community.docker.docker_container:
-        name: scientific-calculator
-        image: vaibhav48/scientific-calculator:latest
+    - name: Run the new Docker container
+      docker_container:
+        name: scientific_calculator
+        image: vaibhav48/scientific-calculator
         state: started
         restart_policy: always
         ports:
