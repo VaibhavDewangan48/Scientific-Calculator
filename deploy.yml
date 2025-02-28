@@ -1,0 +1,24 @@
+---
+- name: Deploy Scientific Calculator
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Pull Docker image from Docker Hub
+      community.docker.docker_image:
+        name: vaibhav48/scientific-calculator:latest
+        source: pull
+
+    - name: Stop existing container (if running)
+      community.docker.docker_container:
+        name: scientific-calculator
+        state: absent
+
+    - name: Run new container
+      community.docker.docker_container:
+        name: scientific-calculator
+        image: vaibhav48/scientific-calculator:latest
+        state: started
+        restart_policy: always
+        ports:
+          - "8080:8080"
