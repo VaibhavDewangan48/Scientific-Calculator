@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_IMAGE = 'your-dockerhub-username/scientific-calculator'
+        DOCKER_IMAGE = 'vaibhav48/scientific-calculator'
     }
 
     stages {
